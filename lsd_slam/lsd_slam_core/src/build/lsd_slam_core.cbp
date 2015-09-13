@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+   <FileVersion major="1" minor="6" />
+   <Project>
+      <Option title="lsd_slam_core" />
+      <Option makefile_is_custom="1" />
+      <Option compiler="gcc" />
+      <Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\opencv-2.4.9\;CMake Files\..\..\..\..\opencv-2.4.9\release\;CMake Files\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\usr\;CMake Files\..\..\..\..\..\..\usr\local\;CMake Files\..\..\..\..\..\..\usr\local\lib\;CMake Files\..\..\..\..\..\..\usr\local\lib\cmake\;CMake Files\..\..\..\..\..\..\usr\local\lib\cmake\Pangolin\;CMake Files\..\..\..\..\..\..\usr\lib\;CMake Files\..\..\..\..\..\..\usr\lib\vtk-5.8\;CMake Files\..\..\..\..\..\..\usr\lib\vtk-5.8\CMake\;CMake Files\..\..\..\..\pcl-trunk\;CMake Files\..\..\..\..\pcl-trunk\build\;CMake Files\cmake\;" />
+      <Build>
+      <Target title="all">
+         <Option working_dir="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/build" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/build/Makefile&quot;  VERBOSE=1 all" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="LSD">
+         <Option output="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/build/LSD" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/build" />
+         <Option object_output="./" />
+         <Option type="1" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add option="-DDISABLE_ENSENSO" />
+            <Add option="-DDISABLE_PCAP" />
+            <Add option="-DDISABLE_PNG" />
+            <Add option="-DDISABLE_ENSENSO" />
+            <Add option="-DENABLE_SSE" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/include/opencv" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/calib3d/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/contrib/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/core/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/features2d/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/flann/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/gpu/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/highgui/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/imgproc/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/legacy/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/ml/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/nonfree/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/objdetect/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/ocl/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/photo/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/stitching/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/superres/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/ts/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/video/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/videostab/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/release" />
+            <Add directory="/home/prashanthi/pcl-trunk/2d/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/build/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/common/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/cuda/common/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/cuda/features/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/cuda/sample_consensus/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/cuda/segmentation/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/features/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/filters/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/geometry/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/gpu/containers/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/gpu/features/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/gpu/kinfu/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/gpu/kinfu_large_scale/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/gpu/octree/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/gpu/segmentation/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/gpu/utils/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/io/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/kdtree/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/keypoints/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/ml/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/octree/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/outofcore/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/people/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/recognition/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/registration/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/sample_consensus/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/search/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/segmentation/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/stereo/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/surface/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/tracking/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/visualization/include" />
+            <Add directory="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src" />
+            <Add directory="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/thirdparty/Sophus" />
+            <Add directory="/opt/ros/fuerte/include" />
+            <Add directory="/usr/include" />
+            <Add directory="/usr/include/eigen3" />
+            <Add directory="/usr/include/ni" />
+            <Add directory="/usr/include/openni2" />
+            <Add directory="/usr/include/qhull" />
+            <Add directory="/usr/include/suitesparse" />
+            <Add directory="/usr/include/vtk-5.8" />
+            <Add directory="/usr/local/lib/cmake/Pangolin/../../../include" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/build/Makefile&quot;  VERBOSE=1 LSD" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="LSD/fast">
+         <Option output="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/build/LSD" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/build" />
+         <Option object_output="./" />
+         <Option type="1" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add option="-DDISABLE_ENSENSO" />
+            <Add option="-DDISABLE_PCAP" />
+            <Add option="-DDISABLE_PNG" />
+            <Add option="-DDISABLE_ENSENSO" />
+            <Add option="-DENABLE_SSE" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/include/opencv" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/calib3d/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/contrib/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/core/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/features2d/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/flann/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/gpu/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/highgui/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/imgproc/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/legacy/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/ml/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/nonfree/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/objdetect/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/ocl/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/photo/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/stitching/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/superres/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/ts/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/video/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/videostab/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/release" />
+            <Add directory="/home/prashanthi/pcl-trunk/2d/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/build/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/common/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/cuda/common/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/cuda/features/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/cuda/sample_consensus/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/cuda/segmentation/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/features/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/filters/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/geometry/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/gpu/containers/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/gpu/features/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/gpu/kinfu/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/gpu/kinfu_large_scale/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/gpu/octree/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/gpu/segmentation/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/gpu/utils/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/io/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/kdtree/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/keypoints/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/ml/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/octree/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/outofcore/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/people/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/recognition/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/registration/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/sample_consensus/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/search/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/segmentation/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/stereo/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/surface/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/tracking/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/visualization/include" />
+            <Add directory="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src" />
+            <Add directory="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/thirdparty/Sophus" />
+            <Add directory="/opt/ros/fuerte/include" />
+            <Add directory="/usr/include" />
+            <Add directory="/usr/include/eigen3" />
+            <Add directory="/usr/include/ni" />
+            <Add directory="/usr/include/openni2" />
+            <Add directory="/usr/include/qhull" />
+            <Add directory="/usr/include/suitesparse" />
+            <Add directory="/usr/include/vtk-5.8" />
+            <Add directory="/usr/local/lib/cmake/Pangolin/../../../include" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/build/Makefile&quot;  VERBOSE=1 LSD/fast" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="lsdslam">
+         <Option output="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/lib/liblsdslam.so" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/build" />
+         <Option object_output="./" />
+         <Option type="3" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add option="-DDISABLE_ENSENSO" />
+            <Add option="-DDISABLE_PCAP" />
+            <Add option="-DDISABLE_PNG" />
+            <Add option="-DDISABLE_ENSENSO" />
+            <Add option="-DENABLE_SSE" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/include/opencv" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/calib3d/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/contrib/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/core/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/features2d/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/flann/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/gpu/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/highgui/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/imgproc/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/legacy/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/ml/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/nonfree/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/objdetect/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/ocl/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/photo/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/stitching/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/superres/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/ts/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/video/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/videostab/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/release" />
+            <Add directory="/home/prashanthi/pcl-trunk/2d/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/build/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/common/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/cuda/common/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/cuda/features/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/cuda/sample_consensus/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/cuda/segmentation/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/features/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/filters/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/geometry/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/gpu/containers/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/gpu/features/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/gpu/kinfu/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/gpu/kinfu_large_scale/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/gpu/octree/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/gpu/segmentation/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/gpu/utils/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/io/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/kdtree/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/keypoints/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/ml/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/octree/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/outofcore/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/people/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/recognition/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/registration/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/sample_consensus/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/search/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/segmentation/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/stereo/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/surface/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/tracking/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/visualization/include" />
+            <Add directory="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src" />
+            <Add directory="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/thirdparty/Sophus" />
+            <Add directory="/opt/ros/fuerte/include" />
+            <Add directory="/usr/include" />
+            <Add directory="/usr/include/eigen3" />
+            <Add directory="/usr/include/ni" />
+            <Add directory="/usr/include/openni2" />
+            <Add directory="/usr/include/qhull" />
+            <Add directory="/usr/include/suitesparse" />
+            <Add directory="/usr/include/vtk-5.8" />
+            <Add directory="/usr/local/lib/cmake/Pangolin/../../../include" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/build/Makefile&quot;  VERBOSE=1 lsdslam" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="lsdslam/fast">
+         <Option output="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/lib/liblsdslam.so" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/build" />
+         <Option object_output="./" />
+         <Option type="3" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add option="-DDISABLE_ENSENSO" />
+            <Add option="-DDISABLE_PCAP" />
+            <Add option="-DDISABLE_PNG" />
+            <Add option="-DDISABLE_ENSENSO" />
+            <Add option="-DENABLE_SSE" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/include/opencv" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/calib3d/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/contrib/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/core/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/features2d/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/flann/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/gpu/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/highgui/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/imgproc/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/legacy/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/ml/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/nonfree/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/objdetect/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/ocl/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/photo/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/stitching/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/superres/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/ts/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/video/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/modules/videostab/include" />
+            <Add directory="/home/prashanthi/opencv-2.4.9/release" />
+            <Add directory="/home/prashanthi/pcl-trunk/2d/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/build/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/common/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/cuda/common/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/cuda/features/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/cuda/sample_consensus/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/cuda/segmentation/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/features/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/filters/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/geometry/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/gpu/containers/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/gpu/features/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/gpu/kinfu/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/gpu/kinfu_large_scale/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/gpu/octree/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/gpu/segmentation/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/gpu/utils/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/io/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/kdtree/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/keypoints/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/ml/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/octree/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/outofcore/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/people/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/recognition/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/registration/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/sample_consensus/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/search/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/segmentation/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/stereo/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/surface/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/tracking/include" />
+            <Add directory="/home/prashanthi/pcl-trunk/visualization/include" />
+            <Add directory="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src" />
+            <Add directory="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/thirdparty/Sophus" />
+            <Add directory="/opt/ros/fuerte/include" />
+            <Add directory="/usr/include" />
+            <Add directory="/usr/include/eigen3" />
+            <Add directory="/usr/include/ni" />
+            <Add directory="/usr/include/openni2" />
+            <Add directory="/usr/include/qhull" />
+            <Add directory="/usr/include/suitesparse" />
+            <Add directory="/usr/include/vtk-5.8" />
+            <Add directory="/usr/local/lib/cmake/Pangolin/../../../include" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/build/Makefile&quot;  VERBOSE=1 lsdslam/fast" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="rebuild_cache">
+         <Option working_dir="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/build" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/build/Makefile&quot;  VERBOSE=1 rebuild_cache" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      </Build>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/DataStructures/Frame.cpp">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/DataStructures/FrameMemory.cpp">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/DataStructures/FramePoseStruct.cpp">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/DepthEstimation/DepthMap.cpp">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/DepthEstimation/DepthMapPixelHypothesis.cpp">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/GUI.cpp">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/GlobalMapping/FabMap.cpp">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/GlobalMapping/KeyFrameGraph.cpp">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/GlobalMapping/TrackableKeyFrameSearch.cpp">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/GlobalMapping/g2oTypeSim3Sophus.cpp">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/IOWrapper/OpenCV/ImageDisplay_OpenCV.cpp">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/IOWrapper/Pangolin/PangolinOutput3DWrapper.cpp">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/IOWrapper/Timestamp.cpp">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/LSD.cpp">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/LiveSLAMWrapper.cpp">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/SlamSystem.cpp">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/Tracking/Relocalizer.cpp">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/Tracking/SE3Tracker.cpp">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/Tracking/Sim3Tracker.cpp">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/Tracking/TrackingReference.cpp">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/util/RawLogReader.cpp">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/util/SophusUtil.cpp">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/util/Undistorter.cpp">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/util/globalFuncs.cpp">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/util/settings.cpp">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/DataStructures/Frame.h">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/DataStructures/FrameMemory.h">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/DataStructures/FramePoseStruct.h">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/DepthEstimation/DepthMap.h">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/DepthEstimation/DepthMapPixelHypothesis.h">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/GUI.h">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/GlobalMapping/FabMap.h">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/GlobalMapping/KeyFrameGraph.h">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/GlobalMapping/TrackableKeyFrameSearch.h">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/GlobalMapping/g2oTypeSim3Sophus.h">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/IOWrapper/Pangolin/PangolinOutput3DWrapper.h">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/IOWrapper/Timestamp.h">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/LiveSLAMWrapper.h">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/SlamSystem.h">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/Tracking/Relocalizer.h">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/Tracking/SE3Tracker.h">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/Tracking/Sim3Tracker.h">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/Tracking/TrackingReference.h">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/util/RawLogReader.h">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/util/SophusUtil.h">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/util/Undistorter.h">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/util/globalFuncs.h">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/util/settings.h">
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\" />
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/../../../../opencv-2.4.9/release/OpenCVConfig-version.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\opencv-2.4.9\release\" />
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/../../../../opencv-2.4.9/release/OpenCVConfig.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\opencv-2.4.9\release\" />
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/../../../../opencv-2.4.9/release/OpenCVModules.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\opencv-2.4.9\release\" />
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/../../../../../../usr/local/lib/cmake/Pangolin/PangolinConfigVersion.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\local\lib\cmake\Pangolin\" />
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/../../../../../../usr/local/lib/cmake/Pangolin/PangolinConfig.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\local\lib\cmake\Pangolin\" />
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/../../../../../../usr/local/lib/cmake/Pangolin/PangolinTargets.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\local\lib\cmake\Pangolin\" />
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/../../../../../../usr/local/lib/cmake/Pangolin/PangolinTargets-release.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\local\lib\cmake\Pangolin\" />
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/../../../../../../usr/lib/vtk-5.8/VTKConfigVersion.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\lib\vtk-5.8\" />
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/../../../../../../usr/lib/vtk-5.8/VTKConfig.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\lib\vtk-5.8\" />
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/../../../../../../usr/lib/vtk-5.8/VTKConfigQt.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\lib\vtk-5.8\" />
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/../../../../../../usr/lib/vtk-5.8/VTKTargets.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\lib\vtk-5.8\" />
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/../../../../../../usr/lib/vtk-5.8/VTKTargets-debug.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\lib\vtk-5.8\" />
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/../../../../../../usr/lib/vtk-5.8/UseVTK.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\lib\vtk-5.8\" />
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/../../../../../../usr/lib/vtk-5.8/VTKConfigVersion.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\lib\vtk-5.8\" />
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/../../../../../../usr/lib/vtk-5.8/VTKConfig.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\lib\vtk-5.8\" />
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/../../../../../../usr/lib/vtk-5.8/VTKConfigQt.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\lib\vtk-5.8\" />
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/../../../../../../usr/lib/vtk-5.8/UseVTK.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\lib\vtk-5.8\" />
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/../../../../../../usr/lib/vtk-5.8/VTKConfigVersion.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\lib\vtk-5.8\" />
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/../../../../../../usr/lib/vtk-5.8/VTKConfig.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\lib\vtk-5.8\" />
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/../../../../../../usr/lib/vtk-5.8/VTKConfigQt.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\lib\vtk-5.8\" />
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/../../../../../../usr/lib/vtk-5.8/UseVTK.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\lib\vtk-5.8\" />
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/../../../../../../usr/lib/vtk-5.8/VTKConfigVersion.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\lib\vtk-5.8\" />
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/../../../../../../usr/lib/vtk-5.8/VTKConfig.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\lib\vtk-5.8\" />
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/../../../../../../usr/lib/vtk-5.8/VTKConfigQt.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\lib\vtk-5.8\" />
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/../../../../../../usr/lib/vtk-5.8/UseVTK.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\lib\vtk-5.8\" />
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/../../../../../../usr/lib/vtk-5.8/CMake/vtkMakeInstantiator.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\lib\vtk-5.8\CMake\" />
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/../../../../pcl-trunk/build/PCLConfigVersion.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\pcl-trunk\build\" />
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/../../../../pcl-trunk/build/PCLConfig.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\pcl-trunk\build\" />
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/cmake/FindEigen3.cmake">
+          <Option virtualFolder="CMake Files\cmake\" />
+      </Unit>
+      <Unit filename="/home/prashanthi/segmentation_thread_tracking/lsd_slam/lsd_slam_core/src/cmake/FindSuiteParse.cmake">
+          <Option virtualFolder="CMake Files\cmake\" />
+      </Unit>
+   </Project>
+</CodeBlocks_project_file>

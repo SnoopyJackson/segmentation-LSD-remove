@@ -1,0 +1,2 @@
+/home/prashanthi/projets/segmentation_thread_tracking_remove/lsd_slam/lsd_slam_core/src/build_clean/CMakeFiles/LSD.dir
+/home/prashanthi/projets/segmentation_thread_tracking_remove/lsd_slam/lsd_slam_core/src/build_clean/CMakeFiles/lsdslam.dir
