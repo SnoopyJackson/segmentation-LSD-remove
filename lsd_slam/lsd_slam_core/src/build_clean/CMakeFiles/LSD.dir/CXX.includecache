@@ -2672,6 +2672,10 @@ pcl/registration/icp_nl.h
 pcl/registration/transformation_estimation_point_to_plane_lls.h
 -
 
+/home/prashanthi/projets/segmentation_thread_tracking_remove/lsd_slam/lsd_slam_core/src/MainPlane.cpp
+MainPlane.h
+/home/prashanthi/projets/segmentation_thread_tracking_remove/lsd_slam/lsd_slam_core/src/MainPlane.h
+
 /home/prashanthi/projets/segmentation_thread_tracking_remove/lsd_slam/lsd_slam_core/src/MainPlane.h
 pcl/filters/extract_indices.h
 -
@@ -2695,6 +2699,10 @@ pcl/kdtree/kdtree_flann.h
 -
 pcl/surface/mls.h
 -
+
+/home/prashanthi/projets/segmentation_thread_tracking_remove/lsd_slam/lsd_slam_core/src/Plane.cpp
+Plane.h
+/home/prashanthi/projets/segmentation_thread_tracking_remove/lsd_slam/lsd_slam_core/src/Plane.h
 
 /home/prashanthi/projets/segmentation_thread_tracking_remove/lsd_slam/lsd_slam_core/src/Plane.h
 pcl/filters/extract_indices.h

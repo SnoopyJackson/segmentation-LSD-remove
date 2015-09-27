@@ -5,7 +5,7 @@ CMakeFiles/LSD.dir/LSD.cpp.o
  ../DataStructures/FrameMemory.h
  ../DataStructures/FramePoseStruct.h
  ../GlobalMapping/g2oTypeSim3Sophus.h
- ../IOWrapper/Output3DWrapper.h
+ ../IOWrapper/TimestampedObject.h
  ../include/clams/discrete_depth_distortion_model.h
  ../include/eigen_extensions/eigen_extensions.h
  ../include/gzstream/gzstream.h
@@ -18,6 +18,7 @@ CMakeFiles/LSD.dir/LSD.cpp.o
  ../thirdparty/Sophus/sophus/sim3.hpp
  ../thirdparty/Sophus/sophus/so3.hpp
  ../thirdparty/Sophus/sophus/sophus.hpp
+ ../util/SophusUtil.h
  /home/prashanthi/opencv-2.4.9/include/opencv2/opencv.hpp
  /home/prashanthi/opencv-2.4.9/modules/calib3d/include/opencv2/calib3d/calib3d.hpp
  /home/prashanthi/opencv-2.4.9/modules/contrib/include/opencv2/contrib/contrib.hpp
@@ -96,13 +97,20 @@ CMakeFiles/LSD.dir/LSD.cpp.o
  /home/prashanthi/pcl-trunk/common/include/pcl/point_types.h
  /home/prashanthi/pcl-trunk/common/include/pcl/register_point_struct.h
  /home/prashanthi/pcl-trunk/features/include/pcl/features/feature.h
+ /home/prashanthi/pcl-trunk/features/include/pcl/features/fpfh.h
+ /home/prashanthi/pcl-trunk/features/include/pcl/features/fpfh_omp.h
  /home/prashanthi/pcl-trunk/features/include/pcl/features/impl/feature.hpp
+ /home/prashanthi/pcl-trunk/features/include/pcl/features/impl/fpfh.hpp
+ /home/prashanthi/pcl-trunk/features/include/pcl/features/impl/fpfh_omp.hpp
  /home/prashanthi/pcl-trunk/features/include/pcl/features/impl/integral_image2D.hpp
  /home/prashanthi/pcl-trunk/features/include/pcl/features/impl/integral_image_normal.hpp
  /home/prashanthi/pcl-trunk/features/include/pcl/features/impl/normal_3d.hpp
+ /home/prashanthi/pcl-trunk/features/include/pcl/features/impl/normal_3d_omp.hpp
  /home/prashanthi/pcl-trunk/features/include/pcl/features/integral_image2D.h
  /home/prashanthi/pcl-trunk/features/include/pcl/features/integral_image_normal.h
  /home/prashanthi/pcl-trunk/features/include/pcl/features/normal_3d.h
+ /home/prashanthi/pcl-trunk/features/include/pcl/features/normal_3d_omp.h
+ /home/prashanthi/pcl-trunk/features/include/pcl/features/pfh_tools.h
  /home/prashanthi/pcl-trunk/filters/include/pcl/filters/boost.h
  /home/prashanthi/pcl-trunk/filters/include/pcl/filters/extract_indices.h
  /home/prashanthi/pcl-trunk/filters/include/pcl/filters/filter.h
@@ -141,21 +149,26 @@ CMakeFiles/LSD.dir/LSD.cpp.o
  /home/prashanthi/pcl-trunk/registration/include/pcl/registration/correspondence_sorting.h
  /home/prashanthi/pcl-trunk/registration/include/pcl/registration/correspondence_types.h
  /home/prashanthi/pcl-trunk/registration/include/pcl/registration/default_convergence_criteria.h
+ /home/prashanthi/pcl-trunk/registration/include/pcl/registration/distances.h
  /home/prashanthi/pcl-trunk/registration/include/pcl/registration/eigen.h
  /home/prashanthi/pcl-trunk/registration/include/pcl/registration/icp.h
+ /home/prashanthi/pcl-trunk/registration/include/pcl/registration/icp_nl.h
  /home/prashanthi/pcl-trunk/registration/include/pcl/registration/impl/correspondence_estimation.hpp
  /home/prashanthi/pcl-trunk/registration/include/pcl/registration/impl/correspondence_rejection.hpp
  /home/prashanthi/pcl-trunk/registration/include/pcl/registration/impl/correspondence_types.hpp
  /home/prashanthi/pcl-trunk/registration/include/pcl/registration/impl/default_convergence_criteria.hpp
  /home/prashanthi/pcl-trunk/registration/include/pcl/registration/impl/icp.hpp
  /home/prashanthi/pcl-trunk/registration/include/pcl/registration/impl/registration.hpp
+ /home/prashanthi/pcl-trunk/registration/include/pcl/registration/impl/transformation_estimation_lm.hpp
  /home/prashanthi/pcl-trunk/registration/include/pcl/registration/impl/transformation_estimation_point_to_plane_lls.hpp
  /home/prashanthi/pcl-trunk/registration/include/pcl/registration/impl/transformation_estimation_svd.hpp
  /home/prashanthi/pcl-trunk/registration/include/pcl/registration/registration.h
  /home/prashanthi/pcl-trunk/registration/include/pcl/registration/transformation_estimation.h
+ /home/prashanthi/pcl-trunk/registration/include/pcl/registration/transformation_estimation_lm.h
  /home/prashanthi/pcl-trunk/registration/include/pcl/registration/transformation_estimation_point_to_plane_lls.h
  /home/prashanthi/pcl-trunk/registration/include/pcl/registration/transformation_estimation_svd.h
  /home/prashanthi/pcl-trunk/registration/include/pcl/registration/warp_point_rigid.h
+ /home/prashanthi/pcl-trunk/registration/include/pcl/registration/warp_point_rigid_6d.h
  /home/prashanthi/pcl-trunk/sample_consensus/include/pcl/sample_consensus/boost.h
  /home/prashanthi/pcl-trunk/sample_consensus/include/pcl/sample_consensus/eigen.h
  /home/prashanthi/pcl-trunk/sample_consensus/include/pcl/sample_consensus/impl/lmeds.hpp
@@ -234,14 +247,10 @@ CMakeFiles/LSD.dir/LSD.cpp.o
  /home/prashanthi/pcl-trunk/surface/include/pcl/surface/qhull.h
  /home/prashanthi/pcl-trunk/surface/include/pcl/surface/reconstruction.h
  /home/prashanthi/projets/segmentation_thread_tracking_remove/lsd_slam/lsd_slam_core/src/DataStructures/Frame.h
- /home/prashanthi/projets/segmentation_thread_tracking_remove/lsd_slam/lsd_slam_core/src/GUI.h
- /home/prashanthi/projets/segmentation_thread_tracking_remove/lsd_slam/lsd_slam_core/src/IOWrapper/NotifyBuffer.h
- /home/prashanthi/projets/segmentation_thread_tracking_remove/lsd_slam/lsd_slam_core/src/IOWrapper/Pangolin/Keyframe.h
- /home/prashanthi/projets/segmentation_thread_tracking_remove/lsd_slam/lsd_slam_core/src/IOWrapper/Pangolin/PangolinOutput3DWrapper.h
+ /home/prashanthi/projets/segmentation_thread_tracking_remove/lsd_slam/lsd_slam_core/src/Helper.h
+ /home/prashanthi/projets/segmentation_thread_tracking_remove/lsd_slam/lsd_slam_core/src/IOWrapper/ImageDisplay.h
  /home/prashanthi/projets/segmentation_thread_tracking_remove/lsd_slam/lsd_slam_core/src/IOWrapper/Timestamp.h
- /home/prashanthi/projets/segmentation_thread_tracking_remove/lsd_slam/lsd_slam_core/src/IOWrapper/TimestampedObject.h
  /home/prashanthi/projets/segmentation_thread_tracking_remove/lsd_slam/lsd_slam_core/src/LSD.cpp
- /home/prashanthi/projets/segmentation_thread_tracking_remove/lsd_slam/lsd_slam_core/src/LiveSLAMWrapper.h
  /home/prashanthi/projets/segmentation_thread_tracking_remove/lsd_slam/lsd_slam_core/src/MainPlane.h
  /home/prashanthi/projets/segmentation_thread_tracking_remove/lsd_slam/lsd_slam_core/src/Plane.h
  /home/prashanthi/projets/segmentation_thread_tracking_remove/lsd_slam/lsd_slam_core/src/Segmentation.h
@@ -253,7 +262,6 @@ CMakeFiles/LSD.dir/LSD.cpp.o
  /home/prashanthi/projets/segmentation_thread_tracking_remove/lsd_slam/lsd_slam_core/src/util/Parse.h
  /home/prashanthi/projets/segmentation_thread_tracking_remove/lsd_slam/lsd_slam_core/src/util/RawLogReader.h
  /home/prashanthi/projets/segmentation_thread_tracking_remove/lsd_slam/lsd_slam_core/src/util/Resolution.h
- /home/prashanthi/projets/segmentation_thread_tracking_remove/lsd_slam/lsd_slam_core/src/util/SophusUtil.h
  /home/prashanthi/projets/segmentation_thread_tracking_remove/lsd_slam/lsd_slam_core/src/util/Stopwatch.h
  /home/prashanthi/projets/segmentation_thread_tracking_remove/lsd_slam/lsd_slam_core/src/util/ThreadMutexObject.h
  /home/prashanthi/projets/segmentation_thread_tracking_remove/lsd_slam/lsd_slam_core/src/util/Undistorter.h
@@ -740,55 +748,6 @@ CMakeFiles/LSD.dir/LSD.cpp.o
  /usr/local/include/osgViewer/Viewer
  /usr/local/include/osgViewer/ViewerBase
  /usr/local/include/osgViewer/ViewerEventHandlers
- /usr/local/include/pangolin/attach.h
- /usr/local/include/pangolin/colour.h
- /usr/local/include/pangolin/compat/boostd.h
- /usr/local/include/pangolin/compat/function.h
- /usr/local/include/pangolin/compat/ovr.h
- /usr/local/include/pangolin/compat/type_traits.h
- /usr/local/include/pangolin/config.h
- /usr/local/include/pangolin/datalog.h
- /usr/local/include/pangolin/display.h
- /usr/local/include/pangolin/display_android.h
- /usr/local/include/pangolin/display_glut.h
- /usr/local/include/pangolin/file_utils.h
- /usr/local/include/pangolin/gl.h
- /usr/local/include/pangolin/gl.hpp
- /usr/local/include/pangolin/gl2engine.h
- /usr/local/include/pangolin/gl_es_compat.h
- /usr/local/include/pangolin/glchar.h
- /usr/local/include/pangolin/gldraw.h
- /usr/local/include/pangolin/glfont.h
- /usr/local/include/pangolin/glinclude.h
- /usr/local/include/pangolin/glpangoglu.h
- /usr/local/include/pangolin/glplatform.h
- /usr/local/include/pangolin/glsl.h
- /usr/local/include/pangolin/glstate.h
- /usr/local/include/pangolin/gltext.h
- /usr/local/include/pangolin/handler.h
- /usr/local/include/pangolin/handler_enums.h
- /usr/local/include/pangolin/image.h
- /usr/local/include/pangolin/image_load.h
- /usr/local/include/pangolin/opengl_render_state.h
- /usr/local/include/pangolin/pangolin.h
- /usr/local/include/pangolin/platform.h
- /usr/local/include/pangolin/plotter.h
- /usr/local/include/pangolin/range.h
- /usr/local/include/pangolin/simple_math.h
- /usr/local/include/pangolin/type_convert.h
- /usr/local/include/pangolin/var/var.h
- /usr/local/include/pangolin/var/varextra.h
- /usr/local/include/pangolin/var/varstate.h
- /usr/local/include/pangolin/var/varvalue.h
- /usr/local/include/pangolin/var/varvaluegeneric.h
- /usr/local/include/pangolin/var/varvaluet.h
- /usr/local/include/pangolin/var/varwrapper.h
- /usr/local/include/pangolin/video.h
- /usr/local/include/pangolin/video_common.h
- /usr/local/include/pangolin/video_output.h
- /usr/local/include/pangolin/view.h
- /usr/local/include/pangolin/viewport.h
- /usr/local/include/pangolin/widgets.h
 CMakeFiles/LSD.dir/MainPlane.cpp.o
  /home/prashanthi/pcl-trunk/build/include/pcl/pcl_config.h
  /home/prashanthi/pcl-trunk/common/include/pcl/ModelCoefficients.h

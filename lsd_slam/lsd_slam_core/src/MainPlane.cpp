@@ -104,10 +104,13 @@ pcl::ModelCoefficients::Ptr MainPlane::getNormalizedCoefficients() const
 }
 void MainPlane::setVectorGround(Eigen::Vector3f &vector)
 {
-    double norm = std::sqrt((_vector[0]*_vector[0])+(_vector[1]*_vector[1])+(_vector[2]*_vector[2]));
+    _vector << 0, 0 , 0;
+    double norm = std::sqrt((vector[0]*vector[0])+(vector[1]*vector[1])+(vector[2]*vector[2]));
     _vector[0] = vector[0]/norm;
     _vector[1] = vector[1]/norm;
     _vector[2] = vector[2]/norm;
+    std::cout << "normal ground set" << _vector[0] << " " << _vector[1]<< " " << _vector[2]<< std::endl;
+
 }
 Eigen::Vector3f MainPlane::getVector()
 {

@@ -766,9 +766,9 @@ void Segmentation::computeTransformation()
     pcl::transformPointCloud(*gr, *gr, transformXY);
     Eigen::Vector4f centroid;
     pcl::compute3DCentroid (*gr, centroid);
-    transformTranslationOrigin(0,3) = - centroid[0];
-    transformTranslationOrigin(1,3) = - centroid[1];
-    transformTranslationOrigin(2,3) = - centroid[2];
+//    transformTranslationOrigin(0,3) = - centroid[0];
+//    transformTranslationOrigin(1,3) = - centroid[1];
+//    transformTranslationOrigin(2,3) = - centroid[2];
 }
 /*
 * Compute the height of each plane.
@@ -787,11 +787,14 @@ void Segmentation::transformOrigin()
     normal_ground[0] = _ground.getNormalizedCoefficients()->values[0];
     normal_ground[1] = _ground.getNormalizedCoefficients()->values[1];
     normal_ground[2] = _ground.getNormalizedCoefficients()->values[2];
+
     //rotateVector
     normal_ground = transformXY.block(0,0,3,3) * normal_ground;
-    normal_ground[0] +=transformTranslationOrigin(0,3);
-    normal_ground[1] +=transformTranslationOrigin(1,3);
-    normal_ground[2] +=transformTranslationOrigin(2,3);
+    std::cout << "normal ground origin" << normal_ground[0] << " " << normal_ground[1]<< " " << normal_ground[2]<< std::endl;
+
+    //normal_ground[0] +=transformTranslationOrigin(0,3);
+    //normal_ground[1] +=transformTranslationOrigin(1,3);
+    //normal_ground[2] +=transformTranslationOrigin(2,3);
     //setNormalizedVector TODO
     _ground.setVectorGround(normal_ground);
     Eigen::Vector4f centroid_ground;

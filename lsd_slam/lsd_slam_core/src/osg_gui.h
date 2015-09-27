@@ -100,6 +100,7 @@ public:
     bool getBoolIsStopped() const;
     bool getStopMainThread() const;
     void setTranslation(double x, double y , double z);
+    osg::Geometry* addLine();
      // osg::Geometry* createAxis();
 
 private:

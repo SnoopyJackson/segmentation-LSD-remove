@@ -115,8 +115,8 @@ Eigen::Matrix4f _transformationICP = Eigen::Matrix4f::Identity();
 Eigen::Matrix4f _transformationXYPlane = Eigen::Matrix4f::Identity();
 Eigen::Matrix4f _transformationXYTranslation = Eigen::Matrix4f::Identity();
 int cpt= 0;
-const float leaf = 0.015f; //0.015 // 0.050
-void registerCloudWithNormals2(pcl::PointCloud<pcl::PointXYZRGBA>::Ptr &cloud, pcl::PointCloud<pcl::PointXYZRGBA>::Ptr &ground,  pcl::PointCloud<pcl::PointXYZRGBA>::Ptr &mc, std::vector<Plane> &pl)
+const float leaf = 0.050f; //0.015 // 0.050
+void registerCloudWithNormals2(pcl::PointCloud<pcl::PointXYZRGBA>::Ptr &cloud, pcl::PointCloud<pcl::PointXYZRGBA>::Ptr &ground, Eigen::Vector3f &vectorNormalGround,  pcl::PointCloud<pcl::PointXYZRGBA>::Ptr &mc, std::vector<Plane> &pl)
 {
     // create cloud
     pcl::PointCloud<pcl::PointXYZRGBA>::Ptr cloud_transf(new pcl::PointCloud<pcl::PointXYZRGBA>);
@@ -235,6 +235,8 @@ void registerCloudWithNormals2(pcl::PointCloud<pcl::PointXYZRGBA>::Ptr &cloud, p
         pcl::transformPointCloud (*cloud_transf2, *frameIn1_, _transformationICP);
         pcl::transformPointCloud (*ground, *ground, transform_1);
         pcl::transformPointCloud (*ground, *ground, _transformationICP);
+
+
         if(isFirstFrame)
         {
             pcl::PointIndices::Ptr floor_inliers(new pcl::PointIndices);
@@ -252,6 +254,16 @@ void registerCloudWithNormals2(pcl::PointCloud<pcl::PointXYZRGBA>::Ptr &cloud, p
         }
         pcl::transformPointCloud (*ground, *ground, _transformationXYPlane);
         pcl::transformPointCloud (*ground, *ground, _transformationXYTranslation);
+
+        // TODO : check if the normal is correct
+        vectorNormalGround = transform_1.block(0,0,3,3) * vectorNormalGround;
+        vectorNormalGround = _transformationICP.block(0,0,3,3) * vectorNormalGround;
+        vectorNormalGround = _transformationXYPlane.block(0,0,3,3) * vectorNormalGround;
+
+//        vectorNormalGround(0,0) = _transformationXYTranslation(0,3) + vectorNormalGround(0,0);
+//        vectorNormalGround(1,0) = _transformationXYTranslation(1,3) + vectorNormalGround(1,0);
+//        vectorNormalGround(2,0) = _transformationXYTranslation(2,3) + vectorNormalGround(2,0);
+        normalizeVector(vectorNormalGround);
         *_ground += *ground;
 
         if(cpt != 0 )
@@ -302,16 +314,22 @@ void registerCloudWithNormals2(pcl::PointCloud<pcl::PointXYZRGBA>::Ptr &cloud, p
             pcl::transformPointCloud (*coeff, *coeff, transform_1);
             pcl::transformPointCloud (*coeff, *coeff, _transformationICP);
             pcl::transformPointCloud (*coeff, *coeff, _transformationXYPlane);
-            pcl::transformPointCloud (*coeff, *coeff, _transformationXYTranslation);
+            //pcl::transformPointCloud (*coeff, *coeff, _transformationXYTranslation);
             coefficients->values[0] = coeff->points[0].x;
             coefficients->values[1] = coeff->points[0].y;
             coefficients->values[2] = coeff->points[0].z;
+//            Eigen::Vector3f vectorNormalPlane = pl[p].getVector();
+//            vectorNormalPlane = transform_1.block(0,0,3,3) * vectorNormalPlane;
+//            vectorNormalPlane = _transformationICP.block(0,0,3,3) * vectorNormalPlane;
+//            vectorNormalPlane = _transformationXYPlane.block(0,0,3,3) * vectorNormalPlane;
+//            vectorNormalPlane = _transformationXYTranslation.block(0,0,3,3) * vectorNormalPlane;
 
             Plane plane;
             plane.setCentroid(centroid);
             plane.setHull(plTransf);
             plane.setHeight(height);
             plane.setCoefficients(coefficients);
+            //plane.setVectorGround(vectorNormalPlane);
             plane.setType(pl[p].getTYPE());
             //pcl::ModelCoefficients::Ptr coeff(new  pcl::ModelCoefficients);
             //coeff = pl[p].getCoefficients();
@@ -430,6 +448,152 @@ void registerCloudWithNormals2(pcl::PointCloud<pcl::PointXYZRGBA>::Ptr &cloud, p
     }
 
 }
+
+
+void registerCloudWithNormals2Cleant(pcl::PointCloud<pcl::PointXYZRGBA>::Ptr &cloud, pcl::PointCloud<pcl::PointXYZRGBA>::Ptr &ground, Eigen::Vector3f &vectorNormalGround,  pcl::PointCloud<pcl::PointXYZRGBA>::Ptr &mc, std::vector<Plane> &pl)
+{
+    // create cloud
+    pcl::PointCloud<pcl::PointXYZRGBA>::Ptr frameIn1(new pcl::PointCloud<pcl::PointXYZRGBA>);
+    pcl::PointCloud<pcl::PointNormal>::Ptr  cloud2 (new pcl::PointCloud<pcl::PointNormal>);
+    pcl::PointCloud<pcl::PointNormal>::Ptr  cloud_transf2 (new pcl::PointCloud<pcl::PointNormal>);
+    pcl::PointCloud<pcl::PointNormal>::Ptr  final2 (new pcl::PointCloud<pcl::PointNormal>);
+    pcl::PointCloud<pcl::PointNormal>::Ptr  frameIn1_ (new pcl::PointCloud<pcl::PointNormal>);
+
+    pointCloudToPointNormal(cloud,cloud2);
+    // transfrom camera pose
+    Eigen::Matrix4f transform_1 = Eigen::Matrix4f::Identity();
+    setLocalizationMatrix(transform_1, camPoseSaved);
+    pcl::transformPointCloud (*cloud2, *cloud_transf2, transform_1);
+
+    // if prev_cloud empty fill it with current frame
+    if(prev_cloud2->points.size() == 0)
+    {
+        *prev_cloud2 = *cloud_transf2;
+        std::cout << "initialisation" << std::endl;
+    }
+
+    // pcl::console::setVerbosityLevel(pcl::console::L_DEBUG);
+
+
+    // Normal Estimation
+    pcl::NormalEstimationOMP<pcl::PointNormal,pcl::PointNormal> nest;
+    nest.setRadiusSearch (leaf+0.05);
+    nest.setInputCloud (prev_cloud2);
+    nest.compute (*prev_cloud2);
+    nest.setInputCloud (cloud_transf2);
+    nest.compute (*cloud_transf2);
+
+    // ICP
+    //pcl::IterativeClosestPoint<pcl::PointXYZRGBA, pcl::PointXYZRGBA> icp;
+    pcl::IterativeClosestPointWithNormals<pcl::PointNormal, pcl::PointNormal> icp;
+    //pcl::IterativeClosestPoint<pcl::PointNormal, pcl::PointNormal> icp;
+    //pcl::IterativeClosestPointNonLinear<pcl::PointNormal, pcl::PointNormal> icp;
+    //typedef pcl::registration::TransformationEstimationPointToPlaneLLS<pcl::PointNormal, pcl::PointNormal> PointToPlane;
+    //boost::shared_ptr<PointToPlane> point_to_plane(new PointToPlane);
+    //icp.setTransformationEstimation(point_to_plane);
+
+    // Set the max correspondence distance to 5cm (e.g., correspondences with higher distances will be ignored)
+    icp.setInputSource(cloud_transf2);
+    icp.setInputTarget(prev_cloud2);
+    // Set the max correspondence distance to 5cm (e.g., correspondences with higher distances will be ignored)
+    icp.setMaxCorrespondenceDistance (leaf * 1.5);//0.1 0.25
+    // Set the maximum number of iterations (criterion 1)
+    icp.setMaximumIterations (500);
+    // Set the transformation epsilon (criterion 2)
+    icp.setTransformationEpsilon (1e-8);//1e-5
+    //icp.setTransformationEpsilon (1e-12);//1e-5
+    // Set the euclidean distance differeence epsregisterCloudilon (criterion 3)
+    icp.setEuclideanFitnessEpsilon (1e-8); //1e-5, 1e-8
+    // icp.setUseReciprocalCorrespondences(true);
+    //icp.setTransformationEpsilon(0);
+    icp.setRANSACOutlierRejectionThreshold(1.5f * leaf);
+    //    icp.setMaxCorrespondenceDistance (0.1 ); // 0.25, 0.10
+    //    icp.setMaximumIterations(5000); // 10, 100 /// 50
+    //    //icp.setTransformationEpsilon (1-5); //1-8,  //1-5
+    //    //    // Set the euclidean distance difference epsilon (criterion 3)
+    //    icp.setEuclideanFitnessEpsilon (0.01);//1-5, 0.001 //0.01
+    //    icp.setTransformationEpsilon(1-5);
+    //    icp.setRANSACOutlierRejectionThreshold(1.5f * 0.015);
+
+    icp.align(*final2);
+    if(icp.hasConverged())
+    {
+        //std::cout << "convergence criteria" << icp.getConvergeCriteria()-><< std::endl;
+        std::cout << "number of iteration " << icp.nr_iterations_ << std::endl;
+        if(cpt == 0)
+        {
+            _transformationICP = icp.getFinalTransformation();
+            cpt++;
+        }
+        else // add Transformation in order to be in frame 1
+        {
+            _transformationICP = _transformationICP * icp.getFinalTransformation();
+        }
+        std::cout << "----- score " << icp.getFitnessScore() << std::endl;
+
+        pcl::transformPointCloud (*cloud_transf2, *frameIn1_, _transformationICP);
+        pcl::transformPointCloud (*ground, *ground, transform_1);
+        pcl::transformPointCloud (*ground, *ground, _transformationICP);
+
+        // align to XY plane
+        if(isFirstFrame)
+        {
+            pcl::PointIndices::Ptr floor_inliers(new pcl::PointIndices);
+            pcl::ModelCoefficients::Ptr floor_coeff(new pcl::ModelCoefficients);
+            pcl::SACSegmentation<pcl::PointXYZRGBA> seg;
+            seg.setOptimizeCoefficients(true);
+            seg.setModelType(pcl::SACMODEL_PLANE);
+            seg.setMethodType(pcl::SAC_RANSAC);
+            seg.setDistanceThreshold(0.01);
+            seg.setInputCloud(ground);
+            seg.segment(*floor_inliers, *floor_coeff);
+            Eigen::Vector3f normal_floor(floor_coeff->values[0],floor_coeff->values[1],floor_coeff->values[2]);
+            computeTransformationToOrigin(ground,normal_floor, _transformationXYPlane, _transformationXYTranslation);
+            isFirstFrame = false;
+        }
+        // Transform ground and normal
+        //pcl::transformPointCloud (*ground, *ground, _transformationXYPlane);
+        //pcl::transformPointCloud (*ground, *ground, _transformationXYTranslation);
+        vectorNormalGround = transform_1.block(0,0,3,3) * vectorNormalGround;
+        vectorNormalGround = _transformationICP.block(0,0,3,3) * vectorNormalGround;
+        //vectorNormalGround = _transformationXYPlane.block(0,0,3,3) * vectorNormalGround;
+        normalizeVector(vectorNormalGround);
+        *_ground += *ground;
+
+        // recompute the hull
+        if(cpt != 0 )
+        {
+            pcl::ConcaveHull<pcl::PointXYZRGBA> ghull;
+            ghull.setInputCloud(_ground);
+            ghull.setAlpha(0.8);
+            ghull.reconstruct(*_ground);
+        }
+
+        // Transform remaining Cloud
+        pcl::transformPointCloud (*mc, *mc, transform_1);
+        pcl::transformPointCloud (*mc, *mc, _transformationICP);
+        *_mc += *mc;
+
+        //std::vector<Plane>
+        // check planes
+        EvaluatePlanes(pl,_planes_cloud,planeDetected,transform_1,_transformationICP,_transformationXYPlane,_transformationXYTranslation);
+        planeDetected = true;
+
+        pointNormalToPointCloud(frameIn1, frameIn1_);
+
+        //pcl::transformPointCloud (*frameIn1, *frameIn1, _transformationXYPlane);
+        //pcl::transformPointCloud (*frameIn1, *frameIn1, _transformationXYTranslation);
+
+        *source_cloud += *frameIn1;
+        *prev_cloud2 = *cloud_transf2;
+    }
+    else
+    {
+        std::cerr << "icp failed" << std::endl;
+    }
+
+}
+
 
 void registerCloudWithNormals(pcl::PointCloud<pcl::PointXYZRGBA>::Ptr &cloud, pcl::PointCloud<pcl::PointXYZRGBA>::Ptr &ground,  pcl::PointCloud<pcl::PointXYZRGBA>::Ptr &mc, std::vector<Plane> &pl)
 {
@@ -607,6 +771,7 @@ void registerCloudWithNormals(pcl::PointCloud<pcl::PointXYZRGBA>::Ptr &cloud, pc
             plane.setHull(plTransf);
             plane.setHeight(height);
             plane.setCoefficients(coefficients);
+
             plane.setType(pl[p].getTYPE());
             //pcl::ModelCoefficients::Ptr coeff(new  pcl::ModelCoefficients);
             //coeff = pl[p].getCoefficients();
@@ -1513,6 +1678,7 @@ int main( int argc, char** argv )
     //boost::thread threadGrab(&Camera::run, &camera);
     std::vector<Plane> planes;
     sleep(1);
+    Eigen::Vector3f normalGround;
     while(osgGui.getBoolIsStopped() == false)
     {
         struct timeval tbegin,tend;
@@ -1565,17 +1731,30 @@ int main( int argc, char** argv )
                 texec = ((double)(1000*(tend.tv_sec-tbegin.tv_sec)+((tend.tv_usec-tbegin.tv_usec)/1000)))/1000;
                 //std::cout << "time 3 " <<  texec << std::endl;
                 seg.doSegmentation(filtered);
-                seg.getMainCloud(mc);
+                //seg.getMainCloud(mc);
                 ground = seg.getMainPlane().getHull();
-                seg.getPlanes(planes);
-                normal_ground.x = seg.getMainPlane().getNormalizedCoefficients()->values[0];
-                normal_ground.y = seg.getMainPlane().getNormalizedCoefficients()->values[1];
-                normal_ground.z = seg.getMainPlane().getNormalizedCoefficients()->values[2];
-                //std::cout << "norm " <<  sqrt((normal_ground.x * normal_ground.x) + (normal_ground.y * normal_ground.y) + (normal_ground.z * normal_ground.z)) << std::endl;
+                //seg.getPlanes(planes);  // TODO this normal is not correct, need to be corrected after registration
+                //                normal_ground.x = seg.getMainPlane().getNormalizedCoefficients()->values[0];
+                //                normal_ground.y = seg.getMainPlane().getNormalizedCoefficients()->values[1];
+                //                normal_ground.z = seg.getMainPlane().getNormalizedCoefficients()->values[2];
 
-                registerCloudWithNormals2(filtered, ground, mc, planes);
+
+                //std::cout << "norm " <<  sqrt((normal_ground.x * normal_ground.x) + (normal_ground.y * normal_ground.y) + (normal_ground.z * normal_ground.z)) << std::endl;
+                normalGround = seg.getMainPlane().getVector();
+
+                registerCloudWithNormals2Cleant(filtered, ground,normalGround, mc, planes);
+                std::cout << "normal ground " << normalGround(0,0) << " " << normalGround(1,0)<< " " << normalGround(2,0)<< std::endl;
+
                 //transformCloud(filtered, ground, mc, planes);
                 //addCloudAndGroundAndHull(source_cloud,_ground,_planes_cloud, node, osgGui,colors);
+
+
+                normal_ground.x = normalGround(0,0);
+                normal_ground.y = normalGround(1,0);
+                normal_ground.z = normalGround(2,0);
+                //_ground->clear();
+                //_planes_cloud.clear();
+
                 addCloudAndGroundAndHull(source_cloud,_ground,_planes_cloud, node, osgGui,colors);
                 //*_ground = *ground;
                 std::cout << "number of planes detected " << _planes_cloud.size() << std::endl;
@@ -1616,15 +1795,18 @@ int main( int argc, char** argv )
         texec = ((double)(1000*(tend.tv_sec-tbegin.tv_sec)+((tend.tv_usec-tbegin.tv_usec)/1000)))/1000;
         //boost::this_thread::sleep (boost::posix_time::seconds (0.5));
     }
+    postProcessingGround(_ground,normalGround,_transformationXYPlane, _transformationXYTranslation);
+    postProcessingPlanes(_planes_cloud,_transformationXYPlane,_transformationXYTranslation);
+
     pcl::PointCloud<pcl::PointXYZRGBA>::Ptr map(new pcl::PointCloud<pcl::PointXYZRGBA>);
     *map = *_ground;
-        for(unsigned int i = 0; i < _planes_cloud.size(); i++)
-        {
-            pcl::PointCloud<pcl::PointXYZRGBA>::Ptr pla(new pcl::PointCloud<pcl::PointXYZRGBA>);
-            pla = _planes_cloud[i].getHull();
-            *map += *pla;
-        }
-
+    for(unsigned int i = 0; i < _planes_cloud.size(); i++)
+    {
+        pcl::PointCloud<pcl::PointXYZRGBA>::Ptr pla(new pcl::PointCloud<pcl::PointXYZRGBA>);
+        pla = _planes_cloud[i].getHull();
+        *map += *pla;
+    }
+    // TODO the normal of the planes cloud are not correct !!!
     parseToWRL(_ground,normal_ground,_planes_cloud);
     std::cout << "Map generated" << std::endl;
     pcl::io::savePCDFileASCII ("test_pcd.pcd", *map);

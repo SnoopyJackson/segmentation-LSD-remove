@@ -954,9 +954,210 @@ void computeTransformationToOrigin(pcl::PointCloud<pcl::PointXYZRGBA>::Ptr & gro
     transformXY (2,2) = zz;
 
     pcl::transformPointCloud(*gr, *gr, transformXY);
+
+
+    Eigen::Matrix4f transforminverse = Eigen::Matrix4f::Identity();
+
+    transforminverse (0,0) = -1; //cos (theta);
+    transforminverse (0,1) = 0;// -sin(theta)
+    transforminverse (0,2) = 0;
+    transforminverse (1,0) = 0; // sin (theta)
+    transforminverse (1,1) = 1;
+    transforminverse (1,2) = 0;
+    transforminverse (2,0) = 0;
+    transforminverse (2,1) = 0;
+    transforminverse (2,2) = -1;
+    pcl::transformPointCloud(*gr, *gr, transforminverse);
+    transformXY = transforminverse*transformXY;
     Eigen::Vector4f centroid;
     pcl::compute3DCentroid (*gr, centroid);
     transformTranslationOrigin(0,3) = - centroid[0];
     transformTranslationOrigin(1,3) = - centroid[1];
     transformTranslationOrigin(2,3) = - centroid[2];
+
+}
+void normalizeVector(Eigen::Vector3f &vector)
+{
+    float length = std::sqrt( std::pow(vector(0,0),2) + (std::pow(vector(1,0),2)) +  (std::pow(vector(2,0),2)));
+    vector(0,0) = vector(0,0)/length;
+    vector(1,0) = vector(1,0)/length;
+    vector(2,0) = vector(2,0)/length;
+}
+
+void pointCloudToPointNormal(const pcl::PointCloud<pcl::PointXYZRGBA>::Ptr &cloud, pcl::PointCloud<pcl::PointNormal>::Ptr &cloud2)
+{
+    for(size_t i = 0; i < cloud->points.size(); i++)
+    {
+        pcl::PointNormal point;
+        point.x = cloud->points[i].x;
+        point.y = cloud->points[i].y;
+        point.z = cloud->points[i].z;
+        cloud2->push_back(point);
+    }
+}
+
+void pointNormalToPointCloud(pcl::PointCloud<pcl::PointXYZRGBA>::Ptr &cloud, pcl::PointCloud<pcl::PointNormal>::Ptr &cloud2)
+{
+    for(size_t i = 0; i < cloud2->points.size(); i++)
+    {
+        pcl::PointXYZRGBA point;
+        point.x = cloud2->points[i].x;
+        point.y = cloud2->points[i].y;
+        point.z = cloud2->points[i].z;
+        cloud->push_back(point);
+    }
+}
+
+void setLocalizationMatrix(Eigen::Matrix4f &transform, Sophus::Sim3f &poseSaved)
+{
+    transform (0,0) = poseSaved.rotationMatrix()(0,0); //cos (theta);
+    transform (0,1) = poseSaved.rotationMatrix()(0,1);// -sin(theta)
+    transform (0,2) = poseSaved.rotationMatrix()(0,2);
+    transform (1,0) = poseSaved.rotationMatrix()(1,0); // sin (theta)
+    transform (1,1) = poseSaved.rotationMatrix()(1,1); //cos (theta)
+    transform (1,2) = poseSaved.rotationMatrix()(1,2);
+    transform (2,0) = poseSaved.rotationMatrix()(2,0) ;
+    transform (2,1) = poseSaved.rotationMatrix()(2,1);
+    transform (2,2) = poseSaved.rotationMatrix()(2,2);
+    //    (row, column)
+
+    // Define a translation of 2.5 meters on the x axis.
+    transform (0,3) = poseSaved.translation()[0]; //2.5
+    transform (1,3) = poseSaved.translation()[1]; //2.5
+    transform (2,3) = poseSaved.translation()[2]; //2.5
+
+}
+
+void EvaluatePlanes(std::vector<Plane> &pl, std::vector<Plane> & _planes_cloud, bool &planeDetected,const Eigen::Matrix4f &transform_1, const Eigen::Matrix4f &_transformationICP, const Eigen::Matrix4f &_transformationXYPlane, const Eigen::Matrix4f &_transformationXYTranslation)
+{
+
+
+    for(unsigned int p = 0; p < pl.size(); p++)
+    {
+        pcl::PointCloud<pcl::PointXYZRGBA>::Ptr plTransf(new pcl::PointCloud<pcl::PointXYZRGBA>);
+        pcl::PointCloud<pcl::PointXYZ>::Ptr centroidTransf(new pcl::PointCloud<pcl::PointXYZ>);
+
+        Eigen::Vector4f centroid = pl[p].getCentroid();
+        pcl::PointXYZ centroidPoint;
+        centroidPoint.x = centroid[0];
+        centroidPoint.y = centroid[1];
+        centroidPoint.z = centroid[2];
+        centroidTransf->push_back(centroidPoint);
+
+        pcl::transformPointCloud (*centroidTransf, *centroidTransf, transform_1);
+        pcl::transformPointCloud (*centroidTransf, *centroidTransf, _transformationICP);
+        //pcl::transformPointCloud (*centroidTransf, *centroidTransf, _transformationXYPlane);
+        //pcl::transformPointCloud (*centroidTransf, *centroidTransf, _transformationXYTranslation);
+
+        Eigen::Vector4f height = pl[p].getHeight();
+
+        plTransf = pl[p].getHull();
+        pcl::transformPointCloud (*plTransf, *plTransf, transform_1);
+        pcl::transformPointCloud (*plTransf, *plTransf, _transformationICP);
+        //pcl::transformPointCloud (*plTransf, *plTransf, _transformationXYPlane);
+        //pcl::transformPointCloud (*plTransf, *plTransf, _transformationXYTranslation);
+
+        pcl::PointCloud<pcl::PointXYZ>::Ptr coeff(new pcl::PointCloud<pcl::PointXYZ>);
+        pcl::ModelCoefficients::Ptr coefficients(new  pcl::ModelCoefficients);
+        coefficients = pl[p].getCoefficients();
+        pcl::PointXYZ coeffPoint;
+        coeffPoint.x = coefficients->values[0];
+        coeffPoint.y = coefficients->values[1];
+        coeffPoint.z = coefficients->values[2];
+        coeff->push_back(coeffPoint);
+        pcl::transformPointCloud (*coeff, *coeff, transform_1);
+        //pcl::transformPointCloud (*coeff, *coeff, _transformationICP);
+        //pcl::transformPointCloud (*coeff, *coeff, _transformationXYPlane);
+
+        coefficients->values[0] = coeff->points[0].x;
+        coefficients->values[1] = coeff->points[0].y;
+        coefficients->values[2] = coeff->points[0].z;
+
+        Eigen::Vector3f vectorNormalPlane = pl[p].getVector();
+        vectorNormalPlane = transform_1.block(0,0,3,3) * vectorNormalPlane;
+        vectorNormalPlane = _transformationICP.block(0,0,3,3) * vectorNormalPlane;
+        //vectorNormalPlane = _transformationXYPlane.block(0,0,3,3) * vectorNormalPlane;
+
+        // new plane
+        Plane plane;
+        plane.setCentroid(centroid);
+        plane.setHull(plTransf);
+        plane.setHeight(height);
+        plane.setCoefficients(coefficients);
+        plane.setVectorGround(vectorNormalPlane);
+        plane.setType(pl[p].getTYPE());
+        Eigen::Vector4f centroid_(centroidTransf->points[0].x,centroidTransf->points[0].y,centroidTransf->points[0].z, 0.0 );
+        plane.setCentroidTrans(centroid_);
+
+        if(!planeDetected)
+        {
+            _planes_cloud.push_back(plane);
+        }
+        else
+        {
+            for(unsigned int j = 0 ; j < _planes_cloud.size() + 1;j++)
+            {
+                if(j == _planes_cloud.size())
+                {
+                    _planes_cloud.push_back(plane);
+                    break;
+                }
+
+                Eigen::Vector4f centroidPrev = _planes_cloud[j].getCentroidTrans();
+
+                pcl::ModelCoefficients::Ptr coeff_prev(new  pcl::ModelCoefficients);
+                coeff_prev = _planes_cloud[j].getNormalizedCoefficients();
+
+                // check the position of the centroid
+                if((computeDistanceCentroid(centroid_, centroidPrev, 0.15 ) == true))
+                {
+                    _planes_cloud[j].setHeight(height);
+                    _planes_cloud[j].setCentroidTrans(centroid_);
+                    _planes_cloud[j].concatenateCloud(plTransf); // concatenate Hull
+                    break;
+                }
+                else
+                {
+                    // std::cout << "Add new plane !!" << std::endl;
+                    //double diff = std::abs(centroid_[2]) - std::abs(centroidPrev[2]);
+                }
+            }
+        }
+    }
+}
+void postProcessingGround(pcl::PointCloud<pcl::PointXYZRGBA>::Ptr &ground, Eigen::Vector3f &normalGround, const Eigen::Matrix4f &_transformationXYPlane,const Eigen::Matrix4f &_transformationXYTranslation)
+{
+    // Transform ground and normal
+    pcl::transformPointCloud (*ground, *ground, _transformationXYPlane);
+    pcl::transformPointCloud (*ground, *ground, _transformationXYTranslation);
+    normalGround = _transformationXYPlane.block(0,0,3,3) * normalGround;
+    normalizeVector(normalGround);
+}
+
+void postProcessingPlanes(std::vector<Plane> &planes_cloud,const Eigen::Matrix4f &_transformationXYPlane,const Eigen::Matrix4f &_transformationXYTranslation)
+{
+    std::vector<Plane> planes;
+    planes.clear();
+    for(int i = 0 ; i < planes_cloud.size(); i++)
+    {
+        pcl::PointCloud<pcl::PointXYZRGBA>::Ptr plTransf(new pcl::PointCloud<pcl::PointXYZRGBA>);
+        plTransf = planes_cloud[i].getHull();
+
+        pcl::transformPointCloud (*plTransf, *plTransf, _transformationXYPlane);
+        pcl::transformPointCloud (*plTransf, *plTransf, _transformationXYTranslation);
+
+        Eigen::Vector3f vectorNormalPlane = planes_cloud[i].getVector();
+        vectorNormalPlane = _transformationXYPlane.block(0,0,3,3) * vectorNormalPlane;
+        Plane plane;
+        plane.setHull(plTransf);
+        plane.setVectorGround(vectorNormalPlane);
+        planes.push_back(plane);
+    }
+
+    planes_cloud.clear();
+    planes_cloud = std::vector<Plane>();
+
+    planes_cloud = planes;
+
+
 }
